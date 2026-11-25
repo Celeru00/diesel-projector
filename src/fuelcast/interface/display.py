@@ -8,8 +8,8 @@ from rich.rule import Rule
 from rich.table import Table
 from rich.text import Text
 
-from fuelcast.advisor import PERSONAS, signed_peso
 from fuelcast.config import ASOF_DAY
+from fuelcast.domain.advisor import PERSONAS, signed_peso
 
 console = Console()
 

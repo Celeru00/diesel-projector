@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support
 
 from fuelcast.config import SETTINGS
-from fuelcast.features import direction, feature_list
-from fuelcast.models import MODEL_FACTORIES
+from fuelcast.domain.features import direction, feature_list
+from fuelcast.domain.models import MODEL_FACTORIES
 
 LABELS = ["down", "flat", "up"]
 BACKTEST_COLUMNS = ["effective_date", "model", "actual", "pred", "pred_direction", "confidence", "low", "high", "brent_trend5_pct", "brent_vol_z", "implied_partial", "lag1"]

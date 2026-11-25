@@ -2,12 +2,12 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from fuelcast.advisor import advise, detect_shock, infer
-from fuelcast.clean import clean_market, normalize_units
-from fuelcast.evaluate import metrics, walk_forward
-from fuelcast.features import build_cycles, direction, feature_list, fuel_frame, pricing_window, round_tick
-from fuelcast.ingest import load_doe
-from fuelcast.models import MODEL_FACTORIES
+from fuelcast.domain.advisor import advise, detect_shock, infer
+from fuelcast.domain.cleaning import clean_market, normalize_units
+from fuelcast.domain.evaluation import metrics, walk_forward
+from fuelcast.domain.features import build_cycles, direction, feature_list, fuel_frame, pricing_window, round_tick
+from fuelcast.domain.models import MODEL_FACTORIES
+from fuelcast.infrastructure.doe import load_doe
 
 
 def test_pricing_window_is_prior_mon_to_fri():

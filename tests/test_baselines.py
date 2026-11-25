@@ -3,10 +3,10 @@ import pandas as pd
 import pytest
 from conftest import make_bt
 
-from fuelcast.analysis import compare_to_baselines, diebold_mariano, mcnemar
-from fuelcast.evaluate import metrics, summarize, walk_forward
-from fuelcast.features import feature_list
-from fuelcast.models import MajorityBaseline, PersistenceBaseline
+from fuelcast.domain.analysis import compare_to_baselines, diebold_mariano, mcnemar
+from fuelcast.domain.evaluation import metrics, summarize, walk_forward
+from fuelcast.domain.features import feature_list
+from fuelcast.domain.models import MajorityBaseline, PersistenceBaseline
 
 
 def _xy(lag1, y):

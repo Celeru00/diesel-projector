@@ -2,9 +2,9 @@ from datetime import datetime
 
 import pandas as pd
 
-from fuelcast.advisor import PERSONAS, signed_peso
 from fuelcast.config import ASOF_DAY, REPORT_DIR
-from fuelcast.display import (
+from fuelcast.domain.advisor import PERSONAS, signed_peso
+from fuelcast.interface.display import (
     BASELINES,
     CONDITION_LABELS,
     DIRECTION_STYLE,

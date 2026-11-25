@@ -1,16 +1,12 @@
-import pickle
-
 import pandas as pd
 
-from fuelcast import db
-from fuelcast.config import DATA_DIR
-from fuelcast.features import feature_list
-from fuelcast.pipeline import latest_row
+from fuelcast.domain.features import feature_list, latest_row
+from fuelcast.infrastructure import database as db
+from fuelcast.infrastructure.artifacts import load_model
 
 
 def explain(fuel: str) -> dict:
-    with open(DATA_DIR / f"model_{fuel}.pkl", "rb") as fh:
-        model = pickle.load(fh)
+    model = load_model(fuel)
     frame = db.read_table(f"features_{fuel}", index_col="effective_date", parse_dates=["effective_date", "asof"])
     feats = feature_list()
     target = latest_row(frame)

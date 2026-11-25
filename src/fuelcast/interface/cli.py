@@ -1,9 +1,12 @@
 import argparse
 from dataclasses import asdict
 
-from fuelcast import display, pipeline
-from fuelcast.advisor import PERSONAS, advise
-from fuelcast.report import write_evaluation_report, write_report
+from fuelcast.application import pipeline
+from fuelcast.application.explain import explain
+from fuelcast.config import FUEL
+from fuelcast.domain.advisor import PERSONAS, advise
+from fuelcast.interface import display
+from fuelcast.interface.report import write_evaluation_report, write_report
 
 
 def _show_analysis(res: dict) -> None:
@@ -36,9 +39,7 @@ def cmd_evaluate(args) -> None:
 
 
 def cmd_explain(args) -> None:
-    from fuelcast.explain import explain
-
-    display.show_explain(explain("diesel"))
+    display.show_explain(explain(FUEL))
 
 
 def cmd_advise(args) -> None:

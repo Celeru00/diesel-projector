@@ -9,7 +9,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from fuelcast.config import FLAT_BAND, SETTINGS
-from fuelcast.features import direction, round_tick
+from fuelcast.domain.features import direction, round_tick
 
 INTERVAL_Z = 1.2816
 

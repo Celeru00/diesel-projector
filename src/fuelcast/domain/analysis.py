@@ -3,7 +3,7 @@ import pandas as pd
 from scipy.stats import binomtest, norm
 
 from fuelcast.config import ASOF_DAY, SETTINGS
-from fuelcast.features import direction
+from fuelcast.domain.features import direction
 
 BASELINES = ("persistence", "majority")
 NEAR_FLAT = 0.25

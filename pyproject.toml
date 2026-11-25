@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-fuelcast = "fuelcast.cli:main"
+fuelcast = "fuelcast.interface.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]

@@ -99,3 +99,7 @@ def fuel_frame(cycles: pd.DataFrame, fuel: str, doe: pd.DataFrame | None = None,
 
 def feature_list(lags: int = SETTINGS.lags) -> list[str]:
     return FEATURE_COLUMNS + [f"lag{k}" for k in range(1, lags + 1)]
+
+
+def latest_row(frame: pd.DataFrame) -> pd.DataFrame:
+    return frame.dropna(subset=feature_list()).iloc[[-1]]

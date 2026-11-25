@@ -6,14 +6,14 @@ import pytest
 import requests
 from conftest import make_bt, make_raw
 
-from fuelcast import ingest
-from fuelcast.advisor import advise
-from fuelcast.analysis import failure_breakdown, failure_cases, tag_conditions
-from fuelcast.clean import clean_market, normalize_units
-from fuelcast.evaluate import walk_forward
-from fuelcast.features import build_cycles, cycle_features, feature_list, fuel_frame
-from fuelcast.ingest import load_doe
-from fuelcast.models import MODEL_FACTORIES, HybridModel, KNNModel, LinearModel
+from fuelcast.domain.advisor import advise
+from fuelcast.domain.analysis import failure_breakdown, failure_cases, tag_conditions
+from fuelcast.domain.cleaning import clean_market, normalize_units
+from fuelcast.domain.evaluation import walk_forward
+from fuelcast.domain.features import build_cycles, cycle_features, feature_list, fuel_frame
+from fuelcast.domain.models import MODEL_FACTORIES, HybridModel, KNNModel, LinearModel
+from fuelcast.infrastructure import market_data as ingest
+from fuelcast.infrastructure.doe import load_doe
 
 PRED = {"pred": 1.0, "low": 0.5, "high": 1.5, "direction": "up", "confidence": 0.9}
 
@@ -288,7 +288,7 @@ def test_advise_every_persona_always_produces_action():
 
 
 def test_explain_cli_parses():
-    from fuelcast.cli import main
+    from fuelcast.interface.cli import main
 
     with pytest.raises(SystemExit):
         main(["explain", "--bogus"])

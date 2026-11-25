@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from fuelcast.clean import clean_market, normalize_units
-from fuelcast.features import build_cycles, fuel_frame
+from fuelcast.domain.cleaning import clean_market, normalize_units
+from fuelcast.domain.features import build_cycles, fuel_frame
 
 
 def make_raw(periods: int = 900, seed: int = 0) -> pd.DataFrame:
@@ -23,7 +23,7 @@ def make_raw(periods: int = 900, seed: int = 0) -> pd.DataFrame:
 
 
 def make_bt(actual, preds: dict, conf=0.9, **extra) -> pd.DataFrame:
-    from fuelcast.features import direction
+    from fuelcast.domain.features import direction
 
     actual = np.asarray(actual, dtype=float)
     dates = pd.date_range("2024-01-02", periods=len(actual), freq="W-TUE")
