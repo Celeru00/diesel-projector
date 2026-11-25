@@ -1,0 +1,6 @@
+scenario,brent_trend5_pct,implied_partial,pred,low,high,confidence,shock,persona,timing,headline
+baseline,-1.8681531835643472,-5.647899999620311,-4.95,-7.1000000000000005,-2.85,0.998,,fleet,wait,Diesel: rollback of about −₱4.95/L expected (range −₱7.10 to −₱2.85; high confidence)
+brent_spike_15,12.851623838900995,1.0814250815475408,1.75,-0.4,3.9000000000000004,0.847,Brent moved +12.9% in 5 days,fleet,shock_partial_topup,[SHOCK WEEK] Diesel: price hike of about +₱1.75/L expected (range −₱0.40 to +₱3.90; high confidence)
+brent_crash_20,-21.49452254685147,-14.620333441177458,-13.05,-14.75,-11.4,1.0,Brent moved −21.5% in 5 days,fleet,shock_buy_as_needed,[SHOCK WEEK] Diesel: rollback of about −₱13.05/L expected (range −₱20.08 to −₱6.03; high confidence)
+peso_slide_4,-1.8681531835643472,-3.8534133113088753,-3.0500000000000003,-4.7,-1.4500000000000002,0.991,,fleet,wait,Diesel: rollback of about −₱3.05/L expected (range −₱4.70 to −₱1.45; high confidence)
+diesel_squeeze,3.038439157257433,2.96370960812204,3.6500000000000004,1.9000000000000001,5.3500000000000005,0.996,,fleet,buy_before,Diesel: price hike of about +₱3.65/L expected (range +₱1.90 to +₱5.35; high confidence)
