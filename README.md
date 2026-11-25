@@ -19,18 +19,49 @@ uv run pytest
 
 Or use the Makefile: `make`, `make offline`, `make evaluate`, `make explain`, `make test`, `make check`.
 
+## Project structure
+
+The code follows clean architecture: four layers, each grouped by what it does. Dependencies point inward only. `domain` never imports from the other layers, so the AI logic has no network, file, or database code in it.
+
+```
+src/fuelcast/
+├── config.py                 settings shared by every layer
+├── domain/                   the AI logic, pure functions, no I/O
+│   ├── cleaning.py           spike removal, gap filling, ₱/L conversion
+│   ├── features.py           Tuesday pricing windows, features, targets
+│   ├── models.py             k-NN, linear regression, hybrid, baselines
+│   ├── evaluation.py         walk-forward backtest and metrics
+│   ├── analysis.py           baseline significance tests, failure analysis
+│   └── advisor.py            expert system: rules and forward-chaining engine
+├── infrastructure/           talks to the outside world
+│   ├── market_data.py        Yahoo Finance download and cache
+│   ├── doe.py                loads and validates data/doe_adjustments.csv
+│   ├── database.py           SQLite read/write
+│   └── artifacts.py          saved model and report CSVs
+├── application/              use cases that wire domain and infrastructure together
+│   ├── pipeline.py           ingest → clean → features → evaluate → forecast → advise
+│   ├── stress.py             synthetic shock scenarios
+│   └── explain.py            why the latest forecast came out the way it did
+└── interface/                what the user sees
+    ├── cli.py                the fuelcast command
+    ├── display.py            terminal tables and panels
+    └── report.py             reports/*.md
+```
+
 ## Pipeline
 
 | Stage | Module | Output (SQLite `data/fuelcast.db`) |
 |---|---|---|
-| Ingestion | `ingest.py` | `market_raw`, `doe_adjustments` |
-| Cleaning and normalization | `clean.py` | `market_daily` |
-| Cycle alignment and features | `features.py` | `cycles`, `features_<fuel>` |
-| Walk-forward evaluation | `evaluate.py` | `backtest_<fuel>`, `metrics`, `reports/metrics.csv` |
-| Training and forecast | `models.py` | `forecasts`, `data/model_<fuel>.pkl` |
-| Baseline comparison and failure analysis | `analysis.py` | `baseline_comparison`, `failure_breakdown`, `failure_cases` (+ CSVs in `reports/`) |
-| Expert system | `advisor.py` | `advice` |
-| Shock stress tests | `pipeline.py` | `stress_tests`, `reports/stress_tests.csv` |
+| Ingestion | `infrastructure/market_data.py`, `infrastructure/doe.py` | `market_raw`, `doe_adjustments` |
+| Cleaning and normalization | `domain/cleaning.py` | `market_daily` |
+| Cycle alignment and features | `domain/features.py` | `cycles`, `features_<fuel>` |
+| Walk-forward evaluation | `domain/evaluation.py` | `backtest_<fuel>`, `metrics`, `reports/metrics.csv` |
+| Training and forecast | `domain/models.py` | `forecasts`, `data/model_<fuel>.pkl` |
+| Baseline comparison and failure analysis | `domain/analysis.py` | `baseline_comparison`, `failure_breakdown`, `failure_cases` (+ CSVs in `reports/`) |
+| Expert system | `domain/advisor.py` | `advice` |
+| Shock stress tests | `application/stress.py` | `stress_tests`, `reports/stress_tests.csv` |
+
+The stages are run in order by `application/pipeline.py`.
 
 ### Data sources
 
