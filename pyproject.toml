@@ -1,0 +1,40 @@
+[project]
+name = "fuelcast"
+version = "0.1.0"
+description = "Weekly Philippine fuel price adjustment predictor and advisor"
+readme = "README.md"
+authors = [
+    { name = "Francis Reid", email = "reidnoneza2005@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.5",
+    "pandas>=3.1.1",
+    "requests>=2.34.2",
+    "rich>=15.0.0",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.18.1",
+]
+
+[project.scripts]
+fuelcast = "fuelcast.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
+
+[tool.ruff]
+line-length = 200
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]
